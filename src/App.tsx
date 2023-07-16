@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {MouseEvent, useState} from 'react';
 import './App.css';
+import Counter from "./components/Counter";
+import {Button} from "./components/Button";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const startCount= 0
+    const [count, setCount] = useState<number>(startCount)
+
+    const buttonClick = (name:string)=>{
+        (name === "inc" && count < 5) ? setCount(count+1) : setCount(0)
+    }
+
+    return (
+        <div className={"counterWrap"}>
+            <Counter count={count}/>
+            <div className={"buttons"}>
+                <Button name={"inc"} buttonClick={buttonClick} disable={count === 5}/>
+                <Button name={"reset"} buttonClick={buttonClick} disable={count === 0}/>
+            </div>
+        </div>
+    );
 }
 
 export default App;
